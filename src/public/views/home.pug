@@ -9,11 +9,9 @@ html(lang="en")
     header 
       h1 hello YOOM
     main
-      form#nick
-        input(type="text", placeholder="choose a nickname")
-        button save
-      ul
-      form#message
-        input(type="text", placeholder= "Write a message", required)
-      button click
+      div#welcome
+        form
+          input(placeholder="room name", type="text", required)
+          button Enter Room
+    script(src="/socket.io/socket.io.js") 
     script(src="/public/js/app.js") 
