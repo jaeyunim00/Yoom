@@ -65,3 +65,38 @@ socket.on("bye", (left) => {
 socket.on("new_message", (msg) => {
   addMessage(msg);
 });
+
+socket.on("room_change", (rooms) => {
+  const roomList = welcome.querySelector("ul");
+  roomList.innerHTML = "";
+  if (rooms.length === 0) {
+    return;
+  }
+  rooms.forEach((room) => {
+    const li = document.createElement("li");
+    li.innerText = room;
+    roomList.appendChild(li);
+  });
+});
+
+//camera
+const myFace = document.getElementById("myFace");
+const muteBtn = document.querySelector("#mute");
+const camera = document.querySelector("#camera");
+
+//stream은 video + audio
+let myStream;
+
+async function getMedia() {
+  try {
+    myStream = await navigator.mediaDevices.getUserMedia({
+      audio: false,
+      video: true,
+    });
+    myFace.srcObject = myStream;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+getMedia();
